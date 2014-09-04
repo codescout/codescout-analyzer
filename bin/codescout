@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path(File.dirname(__FILE__) + "/../lib")
+$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+
+require "rubygems"
+
+path = ARGV.shift.to_s
+if path.empty?
+  STDERR.puts "Please specify path to project"
+  exit 1
+end
+
+require "codescout/repo_analyzer"
+require "codescout/source_file"
+require "codescout/flog_stats"
+require "codescout/flay_stats"
+require "codescout/file_stats"
+require "codescout/churn_stats"
+require "codescout/brakeman_stats"
+require "codescout/rubocop_stats"
+
+analyzer = Codescout::RepoAnalyzer.new(path)
+analyzer.analyze
+
+puts JSON.dump(analyzer.result)
