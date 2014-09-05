@@ -90,6 +90,9 @@ Encoding:
 EvenOdd:
   Enabled: false
 
+HashSyntax:
+  Enabled: false
+
 FileName:
   Enabled: false
 
