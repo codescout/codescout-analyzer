@@ -7,9 +7,10 @@ module Codescout
 
     def initialize(analyzer)
       options = {
-        all: true,
-        methods: true,
-        continue: true
+        all:      true,
+        methods:  true,
+        continue: true,
+        parser:   Ruby19Parser
       }
 
       @flog = Flog.new(options)
