@@ -10,7 +10,10 @@ module Codescout
 
       `rubocop -c rubocop.yml -f json -o rubocop.json`
 
-      json = JSON.load(File.read("rubocop.json"))
+      report = File.read("rubocop.json")
+      return if report.empty?
+
+      json = JSON.load(report)
 
       json["files"].each do |file|
         next unless @analyzer.files.include?(file["path"])
