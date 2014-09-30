@@ -18,6 +18,7 @@ module Codescout
         run_churn
         run_brakeman
         run_rubocop
+        cleanup
       end
     end
 
@@ -76,6 +77,12 @@ module Codescout
     def run_rubocop
       STDERR.puts "Running rubocop"
       @rubocop = Codescout::RubocopStats.new(self).results
+    end
+
+    def cleanup
+      %w(./rubocop.yml ./rubocop.json ./tmp/churn).each do |path|
+        FileUtils.rm_rf(path)
+      end
     end
 
     def valid_file?(file)
