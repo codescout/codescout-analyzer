@@ -87,7 +87,9 @@ module Codescout
     end
 
     def cleanup
-      %w(./rubocop.yml ./rubocop.json ./tmp/churn).each do |path|
+      files = %w(./rubocop.yml ./rubocop.json ./tmp/churn ./brakeman.json)
+
+      files.each do |path|
         FileUtils.rm_rf(path)
       end
     end
