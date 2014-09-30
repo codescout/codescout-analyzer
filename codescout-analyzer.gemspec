@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ruby2ruby", "2.1.1"
   s.add_dependency "brakeman",  "2.6.2"
   s.add_dependency "rubocop",   "0.25.0"
+  s.add_dependency "git",       "1.2.8"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
