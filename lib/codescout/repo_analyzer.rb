@@ -21,6 +21,8 @@ module Codescout
         run_churn
         run_brakeman
         run_rubocop
+        run_commitstats
+        cleanup
       end
     end
 
@@ -32,7 +34,8 @@ module Codescout
         flay:       @flay,
         churn:      @churn,
         brakeman:   @brakeman,
-        rubocop:    @rubocop
+        rubocop:    @rubocop,
+        commit:     @commit
       }
     end
 
@@ -80,6 +83,19 @@ module Codescout
     def run_rubocop
       STDERR.puts "Running rubocop"
       @rubocop = Codescout::RubocopStats.new(self).results
+    end
+
+    def run_commitstats
+      STDERR.puts "Runnig commit stats"
+      @commit = Codescout::CommitStats.new(self).to_hash
+    end
+
+    def cleanup
+      files = %w(./rubocop.yml ./rubocop.json ./tmp/churn ./brakeman.json)
+
+      files.each do |path|
+        FileUtils.rm_rf(path)
+      end
     end
 
     def valid_file?(file)
