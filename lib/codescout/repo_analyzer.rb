@@ -7,6 +7,9 @@ module Codescout
     def initialize(path)
       @base_path = File.expand_path(path)
       @files = []
+      @codescout = {
+        version: Codescout::VERSION
+      }
     end
 
     def analyze
@@ -23,6 +26,7 @@ module Codescout
 
     def result
       {
+        codescout:  @codescout,
         file_stats: @file_stats,
         flog:       @flog,
         flay:       @flay,

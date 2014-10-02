@@ -12,6 +12,7 @@ if path.empty?
   exit 1
 end
 
+require "codescout/version"
 require "codescout/repo_analyzer"
 require "codescout/source_file"
 require "codescout/flog_stats"
