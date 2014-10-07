@@ -4,10 +4,10 @@ require "logger"
 module Codescout
   class CommitStats
     def initialize(analyzer)
-      git = Git.open(".", log: Logger.new(STDERR))
-      commit = git.gcommit("HEAD")
+    end
 
-      @hash = {
+    def to_hash
+      {
         commit:          commit.sha,
         author:          commit.author.name,
         author_email:    commit.author.email,
@@ -18,8 +18,14 @@ module Codescout
       }
     end
 
-    def to_hash
-      @hash
+    private
+
+    def git
+      @git ||= Git.open(".", log: Logger.new(STDERR))
+    end
+
+    def commit
+      @commit ||= git.gcommit("HEAD")
     end
   end
 end
