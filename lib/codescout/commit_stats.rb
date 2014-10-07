@@ -1,6 +1,5 @@
 require "git"
 require "logger"
-require "pp"
 
 module Codescout
   class CommitStats
