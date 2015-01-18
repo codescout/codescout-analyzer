@@ -22,6 +22,7 @@ require "codescout/churn_stats"
 require "codescout/brakeman_stats"
 require "codescout/rubocop_stats"
 require "codescout/commit_stats"
+require "codescout/simplecov_stats"
 
 analyzer = Codescout::RepoAnalyzer.new(path)
 analyzer.analyze

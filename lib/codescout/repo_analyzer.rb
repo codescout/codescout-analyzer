@@ -22,6 +22,7 @@ module Codescout
         run_brakeman
         run_rubocop
         run_commitstats
+        run_simplecov
         cleanup
       end
     end
@@ -35,6 +36,7 @@ module Codescout
         churn:      @churn,
         brakeman:   @brakeman,
         rubocop:    @rubocop,
+        simplecov:  @simplecov,
         commit:     @commit
       }
     end
@@ -88,6 +90,17 @@ module Codescout
     def run_commitstats
       STDERR.puts "Runnig commit stats"
       @commit = Codescout::CommitStats.new(self).to_hash
+    end
+
+    def run_simplecov
+      unless File.exists?("#{base_path}/coverage/index.html")
+        STDERR.puts "SimpleCov coverage file not found"
+        return
+      end
+
+      STDERR.puts "Running simplecov parser"
+      html = File.read("#{base_path}/coverage/index.html")
+      @simplecov = Codescout::SimplecovStats.new(self, html).to_hash
     end
 
     def cleanup
