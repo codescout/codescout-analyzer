@@ -93,13 +93,13 @@ module Codescout
     end
 
     def run_simplecov
-      unless File.exists?("#{base_path}/coverage/index.html")
+      unless File.exists?("coverage/index.html")
         STDERR.puts "SimpleCov coverage file not found"
         return
       end
 
       STDERR.puts "Running simplecov parser"
-      html = File.read("#{base_path}/coverage/index.html")
+      html = File.read("coverage/index.html")
       @simplecov = Codescout::SimplecovStats.new(self, html).to_hash
     end
 
